@@ -37,8 +37,7 @@ class GeradorSenha:
         random.choice(string.ascii_uppercase),  
         random.choice(string.ascii_lowercase),  
         random.choice(string.digits),           
-        random.choice(self.caracteres_especiais or "!@#$%&*()_+-=[]{}|;:,.<>?")
-
+        random.choice(self.caracteres_especiais)
          ]
 
         for _ in range(tamanho - 4):
