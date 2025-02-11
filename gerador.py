@@ -4,23 +4,20 @@ import string
 class GeradorSenha:
     def __init__(self):
         
-        self.caracteres_especiais = 0
         self.letras_maiusculas = 0
         self.letras_minusculas = 0
         self.numeros = 0
-
-        qtd_caracteres_especiais = "!@#$%&*()_+-=[]{}|;:,.<>?"
+        self.qtd_caracteres_especiais = 0
+        self.caracteres_especiais = "!@#$%&*()_+-=[]{}|;:,.<>?"
 
     def definir_senha_personalizada(self, qtd_caracteres_especiais, qtd_letras_maiusculas, qtd_letras_minusculas, qtd_numeros):
-       
-        self.caracteres_especiais = qtd_caracteres_especiais
+        self.qtd_caracteres_especiais = qtd_caracteres_especiais
         self.letras_maiusculas = qtd_letras_maiusculas
         self.letras_minusculas = qtd_letras_minusculas
         self.numeros = qtd_numeros
 
     def gerar_senha_personalizada(self):
-        
-        caracteres_especiais = random.choices("!@#$%&*", k=self.caracteres_especiais)
+        caracteres_especiais = random.choices(self.caracteres_especiais, k=self.qtd_caracteres_especiais)
         letras_maiusculas = random.choices(string.ascii_uppercase, k=self.letras_maiusculas)
         letras_minusculas = random.choices(string.ascii_lowercase, k=self.letras_minusculas)
         numeros = random.choices(string.digits, k=self.numeros)
@@ -30,17 +27,19 @@ class GeradorSenha:
 
         return "".join(senha)
 
+
     def gerar_senha_automatica(self, tamanho_min=12, tamanho_max=15):
         tamanho = random.randint(tamanho_min, tamanho_max)
         
-        todos_caracteres = string.ascii_letters + string.digits + self.qtd_caracteres_especiais
+        todos_caracteres = string.ascii_letters + string.digits + self.caracteres_especiais
 
         senha = [
-            random.choice(string.ascii_uppercase),  
-            random.choice(string.ascii_lowercase),  
-            random.choice(string.digits),           
-            random.choice(self.qtd_caracteres_especiais)  
-        ]
+        random.choice(string.ascii_uppercase),  
+        random.choice(string.ascii_lowercase),  
+        random.choice(string.digits),           
+        random.choice(self.caracteres_especiais or "!@#$%&*()_+-=[]{}|;:,.<>?")
+
+         ]
 
         for _ in range(tamanho - 4):
             senha.append(random.choice(todos_caracteres))
